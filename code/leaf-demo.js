@@ -18,7 +18,7 @@ L.tileLayer( 'http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
 
 var myURL = jQuery( 'script[src$="leaf-demo.js"]' ).attr( 'src' ).replace( 'leaf-demo.js', '' );
 
-var myIcon = L.icon({
+var t2mIcon = L.icon({
     iconUrl: myURL + 'images/pin24.png',
     iconRetinaUrl: myURL + 'images/pin48.png',
     iconSize: [29, 24],
@@ -26,9 +26,13 @@ var myIcon = L.icon({
     popupAnchor: [0, -14]
 });
 
+$.getScript("database.js", function(){});
+
+markers = getT2m();
+
 for ( var i=0; i < markers.length; ++i ) 
 {
-   L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
+   L.marker( [markers[i].lat, markers[i].lon], {icon: t2mIcon} )
       .bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
       .addTo( map );
 }
