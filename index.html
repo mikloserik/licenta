@@ -6,16 +6,27 @@
       
       <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
       <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js?2'></script>
+
+      <link rel="stylesheet" href="dist/css/leaflet.extra-markers.min.css">
+      <script src="dist/js/leaflet.extra-markers.min.js"></script>
+
+      <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
+      <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+      <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+
+      <link rel="stylesheet" href="http://labs.easyblog.it/maps/leaflet-search/style.css">
+      <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false"></script>
+
+      <title>Weather Monitor</title>
    </head>
 
    <body>
-      <h1>Weather Monitor</h1>
       
       <div id="map" style="width: 100%; height: 100%; border: 1px solid #AAA;"></div>
 
-      <script type='text/javascript' src='code/markers.json'></script>
+      <!--<script type='text/javascript' src='code/markers.json'></script>-->
       <script type="text/javascript" src='code/database.js'></script>
-      <script type='text/javascript' src='code/leaf-demo.js'></script>
-
+      <script type='text/javascript' src='code/map.js'></script>
+      <script type="text/javascript" src='code/search.js'></script>
    </body>
 </html>
