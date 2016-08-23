@@ -1,4 +1,4 @@
-function getT2m(zoom) {
+function getT2m(zoom, alg) {
   var xhttp; 
   
   xhttp = new XMLHttpRequest();
@@ -20,7 +20,7 @@ function getT2m(zoom) {
       }
     }
   };
-  xhttp.open("GET", "code/getT2m.php?zoom=" + zoom, true);
+  xhttp.open("GET", "code/getT2m.php?zoom=" + zoom + "&alg=" + alg, true);
   xhttp.send();
 }
 

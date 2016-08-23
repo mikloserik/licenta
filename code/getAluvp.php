@@ -1,4 +1,8 @@
 <?php
+  $zoom = $_GET["zoom"];
+
+  include "clusterGrid.php";
+
   $servername = "localhost";
   $username = "root";
   $password = "";
@@ -29,7 +33,7 @@
 
   $conn->close();
 
-  //var_dump(json_encode($results));
+  $results = clusterKMeans($results, $zoom);
 
   echo json_encode($results);
 

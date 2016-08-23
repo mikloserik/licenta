@@ -1,5 +1,6 @@
 <?php
 	$zoom = $_GET["zoom"];
+	$alg = $_GET["alg"];
 
 	include "clusterGrid.php";
 
@@ -33,7 +34,9 @@
 
 	$conn->close();
 
-	$results = clusterKMeans($results, $zoom);
+	if ($alg == 'server') {
+		$results = clusterKMeans($results, $zoom);
+	}
 
 	echo json_encode($results);
 
