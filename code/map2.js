@@ -2,27 +2,18 @@
 
 var map = L.map( 'map', {
     center: [54.54, 20.19],
-    minZoom: 1,
-    maxZoom: 8,
+    minZoom: 3,
+    maxZoom: 10,
     zoom: 3
 });
 
 map.on('zoomend', handleZoomOut);
 
 function handleZoomOut(evt) {
-	console.log(evt.target, map.getZoom());
-
   zoom = map.getZoom();
-  t2mC.clearLayers();
-
-  tcwv.clearLayers();
-  sp.clearLayers();
-  aluvp.clearLayers();
-
-  getT2m(zoom, document.getElementById("algorithm").value);
-  getTcwv(zoom);
-  getSp(zoom);
-  getAluvp(zoom);
+  t2mS.clearLayers();
+  t2m = [];
+  getT2m(zoom, 'server');
   
 }
 
@@ -62,85 +53,15 @@ var t2mC = L.markerClusterGroup({
   }
 });
 
+var t2mS = L.layerGroup();
+
 var t2m = [];
 
-var tcwv = L.markerClusterGroup({
-  iconCreateFunction: function (cluster) {
-    var markers = cluster.getAllChildMarkers();
-    var n = 0;
-    for (var i = 0; i < markers.length; i++) {
-      n += markers[i].options.title;
-    }
-    n = parseInt(n / markers.length);
-
-    var c = ' marker-cluster-';
-    if (n < 0) {
-      c += 'small';
-    } else if (n < 10) {
-      c += 'medium';
-    } else {
-      c += 'large';
-    }
-
-    return L.divIcon({html: '<div><span>' + n + 'cm</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40)});
-  }
-});
-
-var sp = L.markerClusterGroup({
-  iconCreateFunction: function (cluster) {
-    var markers = cluster.getAllChildMarkers();
-    var n = 0;
-    for (var i = 0; i < markers.length; i++) {
-      n += markers[i].options.title;
-    }
-    n = parseInt(n / markers.length);
-
-    var c = ' marker-cluster-';
-    if (n < 0) {
-      c += 'small';
-    } else if (n < 10) {
-      c += 'medium';
-    } else {
-      c += 'large';
-    }
-
-    return L.divIcon({html: '<div><span>' + n + 'KPa</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40)});
-  }
-});
-
-var aluvp = L.markerClusterGroup({
-  iconCreateFunction: function (cluster) {
-    var markers = cluster.getAllChildMarkers();
-    var n = 0;
-    for (var i = 0; i < markers.length; i++) {
-      if(n < markers[i].options.title){
-        n = markers[i].options.title;
-      }
-    }
-
-    var c = ' marker-cluster-';
-    if (n < 0) {
-      c += 'small';
-    } else if (n < 10) {
-      c += 'medium';
-    } else {
-      c += 'large';
-    }
-
-    return L.divIcon({html: '<div><span>' + n + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40)});
-  }
-});
 
 getT2m(3, "client");
-getTcwv(3);
-getSp(3);
-getAluvp(3);
 
 var meteo = {
-    "Temperature": t2m,
-    "Water vapour": tcwv,
-    "Pressure": sp,
-    "UV radiation": aluvp
+    "Temperature": t2mS,
 };
 
 
@@ -162,14 +83,9 @@ L.control.layers(meteo).addTo(map);
 
 function clearLayers() {
   zoom = map.getZoom();
-  t2m.clearLayers();
-  tcwv.clearLayers();
-  sp.clearLayers();
-  aluvp.clearLayers();
-  getT2m(zoom, document.getElementById("algorithm").value);
-  getTcwv(zoom);
-  getSp(zoom);
-  getAluvp(zoom);
+  t2mS.clearLayers();
+  t2m = [];
+  getT2m(zoom, 'server');
 }
 
 function addToT2m() {
@@ -188,6 +104,8 @@ function addToT2m() {
 
   for ( var i=0; i < t2m.length; ++i ) 
   {
-    t2m[i].addTo(t2mC);
+    t2m[i].addTo(t2mS);
   }
 }
+
+clusterKMeans();

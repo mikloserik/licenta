@@ -14,10 +14,12 @@ function getT2m(zoom, alg) {
           markerColor: 'blue'
         });
 
-        L.marker( [markers[i].lat, markers[i].lon], {icon: t2mIcon, title: parseInt(markers[i].value - 273)} )
+        /*L.marker( [markers[i].lat, markers[i].lon], {icon: t2mIcon, title: parseInt(markers[i].value - 273)} )
           //.bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
-          .addTo( t2m );
+          .addTo( t2m );*/
       }
+
+      addToT2m();
     }
   };
   xhttp.open("GET", "code/getT2m.php?zoom=" + zoom + "&alg=" + alg, true);
