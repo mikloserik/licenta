@@ -10,11 +10,11 @@ var map = L.map( 'map', {
 map.on('zoomend', handleZoomOut);
 
 function handleZoomOut(evt) {
-  zoom = map.getZoom();
-  t2mS.clearLayers();
-  t2m = [];
-  getT2m(zoom, 'server');
-  
+  //zoom = map.getZoom();
+  //t2mS.clearLayers();
+  //t2m = [];
+  //getT2m(zoom, 'server');
+  clusterKMeans();
 }
 
 /*L.tileLayer( 'http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
@@ -85,7 +85,7 @@ function clearLayers() {
   zoom = map.getZoom();
   t2mS.clearLayers();
   t2m = [];
-  getT2m(zoom, 'server');
+  getT2m(zoom, 'client');
 }
 
 function addToT2m() {
@@ -94,6 +94,7 @@ function addToT2m() {
     t2mIcon = L.ExtraMarkers.icon({
       icon: 'fa-number',
       number: parseInt(markers[i].value - 273) + '°C',
+      shape: 'circle',
       markerColor: 'blue'
     });
 
@@ -107,5 +108,3 @@ function addToT2m() {
     t2m[i].addTo(t2mS);
   }
 }
-
-clusterKMeans();

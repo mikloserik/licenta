@@ -35,7 +35,7 @@
 	$conn->close();
 
 	if ($alg == 'server') {
-		$results = clusterKMeans($results, $zoom);
+		//$results = clusterKMeans($results, $zoom);
 	}
 
 	echo json_encode($results);
