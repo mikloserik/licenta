@@ -3,14 +3,14 @@ const LAT_MIN = 33;
 const LAT_MAX = 74;
 const LON_MIN = -27;
 const LON_MAX = 45;
+var clusters = [];
 
 function clusterKMeans() {
-	var clusters = [];
-
-	var k =  map.getZoom() *  map.getZoom() map.getZoom() * 3;
+	var k =  map.getZoom() *  map.getZoom() * map.getZoom() * 2;
 	var n = markers.length;
 
-	
+	clusters.length = 0;
+	clusters = [];
 
 	//select centroids randomly
 	/*for ( var i=0; i < k; ++i ) {
@@ -21,15 +21,16 @@ function clusterKMeans() {
 
 	//generate centroids grid
 	k = Math.round(Math.sqrt(k));
-	for (var i=0; 0 < k; i++) {
-		for ( var ii=0; 0 < k; ii++ ) {
-			clusters[i*ii].lon = (LON_MAX - LON_MIN) / (k+1) * i;
-			clusters[i*ii].lat = (LAT_MAX - LAT_MIN) / (k+1) * ii;
+	for (var i=0; i < k; i++) {
+		for ( var ii=0; ii < k; ii++ ) {
+			clusters.push({lon: 0, lat: 0, value: 0, markers: []});
+			clusters[i*k+ii].lon = LON_MIN + (LON_MAX - LON_MIN) / (k+1) * (i+1);
+			clusters[i*k+ii].lat = LAT_MIN + (LAT_MAX - LAT_MIN) / (k+1) * (ii+1);
 		}
 	}
 
 
-	for ( var i=0; i < merkers.length; ++i ) 
+	for ( var i=0; i < markers.length; ++i ) 
   	{
     	var cKey = getNearestCentroid(i);
     	clusters[cKey].markers.push(markers[i]);
@@ -44,7 +45,7 @@ function clusterKMeans() {
   			for (var ii=0; ii < clusters[i].markers.length; ++ii ) {
   				avgLon += clusters[i].markers[ii].lon;
   				avgLat += clusters[i].markers[ii].lat;
-  				avgVal += clusters[i].markers[ii].value;
+  				avgVal += parseFloat(clusters[i].markers[ii].value);
   			}
   			clusters[i].lon = avgLon/clusters[i].markers.length;
   			clusters[i].lat = avgLat/clusters[i].markers.length;
@@ -63,10 +64,10 @@ function getNearestCentroid(i) {
 		latD = Math.abs(markers[i].lat - clusters[ii].lat);
 		lonD = Math.abs(markers[i].lon - clusters[ii].lon);
 
-		d = sqrt(latD * latD + lonD * lonD);
+		d = Math.sqrt(latD * latD + lonD * lonD);
 		
 		if(d < minD){
-			minD = $d;
+			minD = d;
 			minCKey = ii;
 		}
 	}

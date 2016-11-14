@@ -14,7 +14,10 @@ function handleZoomOut(evt) {
   //t2mS.clearLayers();
   //t2m = [];
   //getT2m(zoom, 'server');
-  clusterKMeans();
+  t2m = [];
+  t2mS.clearLayers();
+  addToT2m();
+  
 }
 
 /*L.tileLayer( 'http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
@@ -28,30 +31,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=s
     id: 'erikmiklos.0ld5n3a1',
     accessToken: 'sk.eyJ1IjoiZXJpa21pa2xvcyIsImEiOiJjaXFsN2YyZWYwMDAwaHRubXY5YmtxaG80In0.Oy26NmXQHPM1fl-71S-LNA'
 }).addTo( map );
-
-//var myURL = jQuery( 'script[src$="map.js"]' ).attr( 'src' ).replace( 'map.js', '' );
-
-var t2mC = L.markerClusterGroup({
-  iconCreateFunction: function (cluster) {
-    var markers = cluster.getAllChildMarkers();
-    var n = 0;
-    for (var i = 0; i < markers.length; i++) {
-      n += markers[i].options.title;
-    }
-    n = parseInt(n / markers.length);
-
-    var c = ' marker-cluster-';
-    if (n < 0) {
-      c += 'small';
-    } else if (n < 10) {
-      c += 'medium';
-    } else {
-      c += 'large';
-    }
-
-    return L.divIcon({html: '<div><span>' + n + '°C</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40)});
-  }
-});
 
 var t2mS = L.layerGroup();
 
@@ -89,16 +68,19 @@ function clearLayers() {
 }
 
 function addToT2m() {
-  for ( var i=0; i < markers.length; ++i ) 
+  clusterKMeans();
+
+  for ( var i=0; i < clusters.length; ++i ) 
   {
     t2mIcon = L.ExtraMarkers.icon({
       icon: 'fa-number',
-      number: parseInt(markers[i].value - 273) + '°C',
-      shape: 'circle',
+      number: parseInt(clusters[i].value - 273) + '°C',
+      shape: 'square',
       markerColor: 'blue'
     });
 
-    t2m.push(L.marker( [markers[i].lat, markers[i].lon], {icon: t2mIcon, title: parseInt(markers[i].value - 273)} ));
+
+    t2m.push(L.marker( [clusters[i].lat, clusters[i].lon], {icon: t2mIcon, title: parseInt(clusters[i].value - 273)} ));
       //.bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
       //.addTo( t2m );
   }
