@@ -9,21 +9,19 @@ var map = L.map( 'map', {
 
 map.on('zoomend', handleZoomOut);
 
+map.on('moveend', handleMove);
+
 function handleZoomOut(evt) {
-  //zoom = map.getZoom();
-  //t2mS.clearLayers();
-  //t2m = [];
-  //getT2m(zoom, 'server');
   t2m = [];
   t2mS.clearLayers();
   addToT2m();
-  
 }
 
-/*L.tileLayer( 'http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright" title="OpenStreetMap" target="_blank">OpenStreetMap</a> contributors | Tiles Courtesy of <a href="http://www.mapquest.com/" title="MapQuest" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" width="16" height="16">',
-    subdomains: ['otile1','otile2','otile3','otile4']
-}).addTo( map );*/
+function handleMove(evt) { 
+    t2m = [];
+    t2mS.clearLayers();
+    addToT2m();
+}
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoiZXJpa21pa2xvcyIsImEiOiJjaXFsN2YyZWYwMDAwaHRubXY5YmtxaG80In0.Oy26NmXQHPM1fl-71S-LNA', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',

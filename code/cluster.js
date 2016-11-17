@@ -6,18 +6,11 @@ const LON_MAX = 45;
 var clusters = [];
 
 function clusterKMeans() {
-	var k =  map.getZoom() *  map.getZoom() * map.getZoom() * 2;
+	var k =  Math.pow(map.getZoom(), map.getZoom() / 2);
 	var n = markers.length;
 
 	clusters.length = 0;
 	clusters = [];
-
-	//select centroids randomly
-	/*for ( var i=0; i < k; ++i ) {
-		var ii = Math.round(Math.random()*(n-i));
-		clusters.push(markers[ii]);
-		markers[ii] = markers[n-i+1];
-	}*/ 
 
 	//generate centroids grid
 	k = Math.round(Math.sqrt(k));
@@ -29,14 +22,22 @@ function clusterKMeans() {
 		}
 	}
 
+	/*for (var i=0; i < clusters.length; i++) {
+		if ( isMarkerInContainer(clusters[i].lon, clusters[i].lat) == false) {
+			clusters.splice(i, 1);
+			i--;
+		}
+	}*/
 
 	for ( var i=0; i < markers.length; ++i ) 
   	{
-    	var cKey = getNearestCentroid(i);
-    	clusters[cKey].markers.push(markers[i]);
+  		if ( isMarkerInContainer(markers[i].lon, markers[i].lat) == true) {
+    		var cKey = getNearestCentroid(i);
+    		clusters[cKey].markers.push(markers[i]);
+    	}
   	}
 
-  	for ( var i=0; i < clusters.length; ++i)
+  	for ( var i=0; i < clusters.length; i++)
   	{
   		var avgLon = 0;
   		var avgLat = 0;
@@ -53,6 +54,7 @@ function clusterKMeans() {
   			delete clusters[i].markers;
   		} else {
   			clusters.splice(i, 1);
+  			i--;
   		}
   	}
 }
@@ -73,4 +75,18 @@ function getNearestCentroid(i) {
 	}
 
 	return minCKey;
+}
+
+function isMarkerInContainer(lon, lat) {
+	bounds = map.getBounds();
+	aux = true;
+
+	if (lon < bounds._southWest.lng || lon > bounds._northEast.lng) {
+		aux = false;
+	}
+	if (lat < bounds._southWest.lat || lat > bounds._northEast.lat) {
+		aux = false;
+	}
+
+	return aux;
 }
