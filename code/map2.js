@@ -7,7 +7,7 @@ var map = L.map( 'map', {
     zoom: 3
 });
 
-map.on('zoomend', handleZoomOut);
+//map.on('zoomend', handleZoomOut);
 
 map.on('moveend', handleMove);
 
@@ -42,19 +42,19 @@ var meteo = {
 };
 
 
-var algorithm = {
+/*var algorithm = {
   "Client side": 1,
   "Server side": 2
-}
+}*/
 
-var algorithm = L.control({position: 'topright'});
+/*var algorithm = L.control({position: 'topright'});
 algorithm.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'select algorithm');
     div.innerHTML = '<select id="algorithm" onchange="clearLayers()"><option value="client">Client side clustering</option><option value="server">Server side clustering</option></select>';
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
-};
-algorithm.addTo(map);
+};*/
+//algorithm.addTo(map);
 
 L.control.layers(meteo).addTo(map);
 
@@ -72,14 +72,14 @@ function addToT2m() {
   {
     t2mIcon = L.ExtraMarkers.icon({
       icon: 'fa-number',
-      number: parseInt(clusters[i].value - 273) + '°C',
+      number: parseInt(clusters[i].t2m - 273) + '°C',
       shape: 'square',
       markerColor: 'blue'
     });
 
 
-    t2m.push(L.marker( [clusters[i].lat, clusters[i].lon], {icon: t2mIcon, title: parseInt(clusters[i].value - 273)} ));
-      //.bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
+    t2m.push(L.marker( [clusters[i].lat, clusters[i].lon], {icon: t2mIcon, title: parseInt(clusters[i].t2m - 273)} ));
+      //.bindPopup( '<a href="' + markers[i]. + '" target="_blank">' + markers[i]. + '</a>' )
       //.addTo( t2m );
   }
 
@@ -87,4 +87,16 @@ function addToT2m() {
   {
     t2m[i].addTo(t2mS);
   }
+}
+
+function addToSp() {
+
+}
+
+function addToUv() {
+
+}
+
+function addToTcwv() {
+  
 }

@@ -10,7 +10,7 @@ function getT2m(zoom, alg) {
       {
         t2mIcon = L.ExtraMarkers.icon({
           icon: 'fa-number',
-          number: parseInt(markers[i].value - 273) + '°C',
+          number: parseInt(markers[i].t2m - 273) + '°C',
           markerColor: 'blue'
         });
 
@@ -19,14 +19,19 @@ function getT2m(zoom, alg) {
           .addTo( t2m );*/
       }
 
+      if (document.cookie == "user=loged") {
+          addToSp();
+          addToUv();
+          addToTcwv();
+      }
       addToT2m();
     }
   };
-  xhttp.open("GET", "code/getT2m.php?zoom=" + zoom + "&alg=" + alg, true);
+  xhttp.open("GET", "code/getT2m.php"/*?zoom=" + zoom + "&alg=" + alg*/, true);
   xhttp.send();
 }
 
-function getTcwv(zoom) {
+/*function getTcwv(zoom) {
   var xhttp2; 
   
   xhttp2 = new XMLHttpRequest();
@@ -102,4 +107,4 @@ function getAluvp(zoom) {
   };
   xhttp.open("GET", "code/getAluvp.php?zoom=" + zoom, true);
   xhttp.send();
-}
+}*/

@@ -5,7 +5,7 @@
 
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$dbname = "licenta";
 
 	// Create connection

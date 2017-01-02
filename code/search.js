@@ -1,10 +1,15 @@
 var GoogleSearch = L.Control.extend({
   onAdd: function() {
+    var container = document.createElement("div");
+    container.id = 'searchBoxContainer';
+
     var element = document.createElement("input");
 
     element.id = "searchBox";
 
-    return element;
+    container.appendChild(element);
+
+    return container;
   }
 });
 

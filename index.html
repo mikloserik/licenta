@@ -20,17 +20,57 @@
       <link rel="stylesheet" href="http://labs.easyblog.it/maps/leaflet-search/style.css">
       <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false"></script>
 
+      <link rel="stylesheet" type="text/css" href="code/style.css">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
       <title>Weather Monitor</title>
    </head>
 
    <body>
       
-      <div id="map" style="width: 100%; height: 100%; border: 1px solid #AAA;"></div>
+      <div id="map" style="width: 100%; height: 100%; border: 1px solid #AAA;">
+         <div class="leaflet-control-container">
+            <div class="leaflet-bottom leaflet-left">
+               <input class="leaflet-control login" type="button" id="logIn" value="LogIn" onclick="logInPopUp()"/>
+               <input class="leaflet-control" type="button" id="logOut" value="LogOut" onclick="logOut()"/>
+            </div>  
+            <div id="login-form-container" class="leaflet-control login">
+               <form id="login-form" class="login">
+                  <!--<input type="button" id="close" onclick="closePopUp()" value="x"/>-->
+                  <input type="text" name="first_name" placeholder="first name" class="login register"/>
+                  <br class="register"/>
+                  <span class="error login register" id="error-first_name"></span>
+                  <br class="register"/>
+                  <input type="text" name="last_name" placeholder="last name" class="login register"/>
+                  <br class="register"/>
+                  <span class="error login register" id="error-last_name"></span>
+                  <br class="register"/> 
+                  <input type="text" name="username" placeholder="username" class="login"/>
+                  <br/>
+                  <span class="error login" id="error-username"></span>
+                  <br/>
+                  <input type="password" name="password" placeholder="password" class="login"/>
+                  <br/>
+                  <span class="error login" id="error-password"></span>
+                  <br/>
+                  <input type="text" name="email" placeholder="email address" class="login register">
+                  <br class="register"/>
+                  <span class="error login register" id="error-email"></span>
+                  <br class="register"/>
+                  <input id="login-btn" type="button" name="login" value="Log In" onclick="logInUser()" class="login">
+                  <input id="reg-form" type="button" name="show-register" value="Register" onclick="showRegister()" class="login">
+                  <input id="reg-btn" type="button" name="register" value="Sign Up" onclick="registerUser()" class="login register">
+               </form>
+            </div>
+         </div> 
+      </div>
 
       <!--<script type='text/javascript' src='code/markers.json'></script>-->
       <script type="text/javascript" src='code/database.js'></script>
       <script type="text/javascript" src='code/cluster.js'></script>
       <script type='text/javascript' src='code/map2.js'></script>
       <script type="text/javascript" src='code/search.js'></script>
+      <script type="text/javascript" src='code/login.js'></script>
    </body>
 </html>
