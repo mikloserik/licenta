@@ -31,6 +31,38 @@ function getT2m(zoom, alg) {
   xhttp.send();
 }
 
+function getSearch(userId) {
+  var xhttp; 
+  
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      search = JSON.parse(xhttp.responseText);
+
+      for ( var i=0; i < search.length; ++i ) 
+      {
+        searchIcon = L.ExtraMarkers.icon({
+          shape: 'circle',
+          markerColor: 'black'
+        });
+
+        m = getNearestMarker(search[i].lat, search[i].lon);
+
+        L.marker( [search[i].lat, search[i].lon], {icon: searchIcon} )
+          .bindPopup( '<div id="popup"><table>' + 
+            '<tr><td><img src="t2m.png" height="15" width="15"></td><td>Temperature:</td><td>'+(m.t2m - 273).toFixed(2)+' °C</td></tr>' + 
+            '<tr><td><img src="ps.png" height="15" width="15"><td>Athm pressure:</td><td>'+(m.sp / 1000).toFixed(2)+' KPa</td></tr>' +
+            '<tr><td><img src="uv.png" height="17" width="17"><td>UV Radiation:</td><td>'+(parseFloat(m.uv).toFixed(4))+'</td></tr>' +
+            '<tr><td><img src="tcwv.png" height="15" width="10"><td>Water Vapour:</td><td>'+(parseFloat(m.tcwv).toFixed(2))+' cm</td></tr>' +
+            '</table></div>' )
+          .addTo(searchS);
+      }
+    }
+  };
+  xhttp.open("GET", "code/getT2m.php?user=" + userId, true);
+  xhttp.send();
+}
+
 /*function getTcwv(zoom) {
   var xhttp2; 
   

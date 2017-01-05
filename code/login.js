@@ -57,6 +57,7 @@ function logInUser() {
       			}
       		} else {
       			document.cookie = "user=loged";//"username=" + document.getElementById('username').value;
+      			var username = document.getElementsByName('username')[0].value
 	      		document.getElementById('logIn').style.display = 'none';
 	      		document.getElementById('logOut').style.display = 'block';
 	      		$('#login-form-container').hide();
@@ -108,6 +109,7 @@ function logOut() {
 	document.getElementById('logIn').style.display = 'block';
 	document.getElementById('logOut').style.display = 'none';
 	location.reload();
+	username = null;
 }
 
 if(document.cookie == "user=loged"){
