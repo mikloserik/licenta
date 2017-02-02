@@ -27,7 +27,7 @@ function getT2m(zoom, alg) {
       addToT2m();
     }
   };
-  xhttp.open("GET", "code/getT2m.php"/*?zoom=" + zoom + "&alg=" + alg*/, true);
+  xhttp.open("GET", "code/backend/xhr/getAll.php"/*?zoom=" + zoom + "&alg=" + alg*/, true);
   xhttp.send();
 }
 

@@ -73,3 +73,9 @@
 	font-style: normal !important;
     width: 200px;
 }
+
+.leaflet-control-layers {
+	position: absolute;
+	top: 50px;
+	right: 4px;
+}
