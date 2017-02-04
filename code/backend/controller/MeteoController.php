@@ -9,6 +9,8 @@ class MeteoController
 {
 	public function getT2mAction()
 	{
+		session_start();
+
 		$t2m = new T2mCollection();
 		$collection = $t2m->loadAll();
 
@@ -28,14 +30,13 @@ class MeteoController
 
 	public function getAllAction()
 	{
-		$t2m = new T2mCollection();
-		$t2mCollection = $t2m->loadAll();
-		$uv = new UvCollection();
-		$uvCollection = $uv->loadAll();
-		$sp = new SpCollection();
-		$spCollection = $sp->loadAll();
-		$tcwv = new TcwvCollection();
-		$tcwvCollection = $tcwv->loadAll();
+		session_start();
+
+		$meteoFactory = new MeteoDataCollectionFactory();
+		$t2mCollection = $meteoFactory->createCollection("T2m")->loadAll();
+		$uvCollection = $meteoFactory->createCollection("Uv")->loadAll();
+		$spCollection = $meteoFactory->createCollection("Sp")->loadAll();
+		$tcwvCollection = $meteoFactory->createCollection("Tcwv")->loadAll();
 
 		$result = array();
 

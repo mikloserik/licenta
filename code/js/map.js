@@ -1,4 +1,3 @@
-// See post: http://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/
 
 var map = L.map( 'map', {
     center: [54.54, 20.19],
@@ -6,8 +5,6 @@ var map = L.map( 'map', {
     maxZoom: 10,
     zoom: 3
 });
-
-//map.on('zoomend', handleZoomOut);
 
 map.on('moveend', handleMove);
 
@@ -55,21 +52,6 @@ if (document.cookie.includes("user=loged")) {
     "Temperature °C": t2mS,
   };
 }
-
-
-/*var algorithm = {
-  "Client side": 1,
-  "Server side": 2
-}*/
-
-/*var algorithm = L.control({position: 'topright'});
-algorithm.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'select algorithm');
-    div.innerHTML = '<select id="algorithm" onchange="clearLayers()"><option value="client">Client side clustering</option><option value="server">Server side clustering</option></select>';
-    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-    return div;
-};*/
-//algorithm.addTo(map);
 
 L.control.layers(meteo).addTo(map);
 

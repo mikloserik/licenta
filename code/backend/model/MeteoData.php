@@ -37,3 +37,29 @@ abstract class MeteoData
 		return $this->lat;
 	}
 }
+
+class MeteoDataCollectionFactory
+{
+	public function createCollection($classname)
+	{
+		switch ($classname)
+		{
+			case "T2m":
+				$collection = new T2mCollection();
+				break;
+			case "Sp":
+				$collection = new SpCollection();
+				break;
+			case "Uv":
+				$collection = new UvCollection();
+				break;
+			case "Tcwv":
+				$collection = new TcwvCollection();
+				break;
+			default:
+				$collection = null;
+		}
+
+		return $collection;
+	}
+}

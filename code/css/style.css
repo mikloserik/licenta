@@ -1,0 +1,81 @@
+#searchBox {
+	float: left;
+	padding: 5px;
+	margin: 5px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #fff;
+    border-radius: 5px;
+}
+
+#searchBoxContainer {
+	/*margin-top: -41px;*/
+}
+
+#logIn {
+	position: relative; 
+ 	padding: 4px;
+ 	margin-top: 4px;
+ 	margin-bottom: 4px;
+ 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #fff;
+    border-radius: 5px;
+}
+
+#logOut {
+	position: relative; 
+ 	padding: 4px;
+ 	margin-top: 4px;
+ 	margin-bottom: 4px;
+ 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #fff;
+    border-radius: 5px;
+}
+
+#login-form-container {
+	padding: 10px;
+	border: 10px;
+	position: fixed;
+	animation-delay: 2;
+	text-align: center;
+	z-index: 2000;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0px 0px -100px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #fff;
+    border-radius: 5px;
+    display: none;
+}
+
+#login-form-container input {
+	float:left;
+	padding: 5px;
+	margin: 5px;
+}
+
+#close {
+	margin-top: 1px;
+    margin-right: 2px;
+}
+
+.register {
+	display: none;
+}
+
+.error {
+	color: red;
+	float: left;
+}
+
+#popup table{
+	font-size: 9pt !important;
+	font-color: black !important;
+	font-style: normal !important;
+    width: 200px;
+}
+
+.leaflet-control-layers {
+	position: absolute;
+	top: 50px;
+	right: 4px;
+}

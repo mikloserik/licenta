@@ -27,39 +27,40 @@ def saveGrib():
     db.commit()
 
     for i in range(0, t2m.values.__len__()):
-        for j in range(0, t2m.values[i].__len__()):
-            try:
+        try:
+            for j in range(0, t2m.values[i].__len__()):
+            #try:
                 cursor.execute("""UPDATE t2m SET value = %s WHERE latitude = %s AND longitude = %s""",(str(t2m.values[i][j]), str(lats[i][j]), str(lons[i][j])))
-                db.commit()
-                print "t2m OK"
-            except:     
-                db.rollback()
-                print "t2m FAIL"
-                exit()
-            try:
+                #db.commit()
+                #print "t2m OK"
+            #except:     
+                #db.rollback()
+                #print "t2m FAIL"
+                #exit()
+            #try:
                 cursor.execute("""UPDATE sp SET value = %s WHERE latitude = %s AND longitude = %s""",(str(sp.values[i][j]), str(lats[i][j]), str(lons[i][j])))
-                db.commit()
-                print "sp OK"
-            except:     
-                db.rollback()
-                print "sp FAIL"
-                exit()
-            try:
+                #db.commit()
+                #print "sp OK"
+            #except:     
+                #db.rollback()
+                #print "sp FAIL"
+                #exit()
+            #try:
                 cursor.execute("""UPDATE uv SET value = %s WHERE latitude = %s AND longitude = %s""",(str(uv.values[i][j]), str(lats[i][j]), str(lons[i][j])))
-                db.commit()
-                print "uv OK"
-            except:     
-                db.rollback()
-                print "uv FAIL"
-                exit()
-            try:
+                #db.commit()
+                #print "uv OK"
+            #except:     
+                #db.rollback()
+                #print "uv FAIL"
+                #exit()
+            #try:
                 cursor.execute("""UPDATE tcwv SET value = %s WHERE latitude = %s AND longitude = %s""",(str(tcwv.values[i][j]), str(lats[i][j]), str(lons[i][j])))
-                db.commit()
-                print "tcwv OK"
-            except:     
-                db.rollback()
-                print "tcwv FAIL"
-                exit()
+            db.commit()
+            print "OK"
+        except:     
+            db.rollback()
+            print "FAIL"
+            exit()
 
     cursor.execute("""UPDATE cron_log SET end_date = %s, status = \"DONE\" WHERE start_date = %s""", (str(datetime.datetime.today()),start_date))
     db.commit()

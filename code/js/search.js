@@ -31,31 +31,11 @@ if(document.cookie.includes("user=loged")){
     map.removeLayer(group);
 
     places.forEach(function(place) {
-      /*// Create a marker for each place.
-      console.log(places);
-      console.log(place.geometry.location.lat() + " / " + place.geometry.location.lng());
-      */
       var marker = L.marker([
         place.geometry.location.lat(),
         place.geometry.location.lng()
       ]);
-      /*
-      searchIcon = L.ExtraMarkers.icon({
-        shape: 'circle',
-        markerColor: 'black'
-      });
-
-      m = getNearestMarker(place.geometry.location.lat(), place.geometry.location.lng());
-
-      var marker = L.marker( [place.geometry.location.lat(), place.geometry.location.lng()], {icon: searchIcon} )
-        .bindPopup( '<div id="popup"><table>' + 
-          '<tr><td><img src="t2m.png" height="15" width="15"></td><td>Temperature:</td><td>'+(m.t2m - 273).toFixed(2)+' °C</td></tr>' + 
-          '<tr><td><img src="ps.png" height="15" width="15"><td>Athm pressure:</td><td>'+(m.sp / 1000).toFixed(2)+' KPa</td></tr>' +
-          '<tr><td><img src="uv.png" height="17" width="17"><td>UV Radiation:</td><td>'+(parseFloat(m.uv).toFixed(4))+'</td></tr>' +
-          '<tr><td><img src="tcwv.png" height="15" width="10"><td>Water Vapour:</td><td>'+(parseFloat(m.tcwv).toFixed(2))+' cm</td></tr>' +
-          '</table></div>' )
-      ;
-      */
+ 
       group.addLayer(marker);
       addUserLocation(
         place.geometry.location.lat(), 
@@ -65,7 +45,6 @@ if(document.cookie.includes("user=loged")){
 
     });
 
-    //group.addTo(map);
     map.fitBounds(group.getBounds());
   });
 }

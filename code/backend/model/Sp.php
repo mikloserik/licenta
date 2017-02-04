@@ -24,7 +24,7 @@ class SpCollection
 	{
 		$spCollection = array();
 
-		$c = new Connection();
+		$c = Connection::getInstance();
 		$conn = $c->getConnection();
 		
 		$sql = "SELECT sp.id, sp.value as spv, sp.latitude, sp.longitude FROM sp;";

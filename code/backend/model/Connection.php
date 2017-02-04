@@ -7,18 +7,22 @@ class Connection
 	private	$password = "root";
 	private	$dbname = "licenta";
 	private $conn;
+	private static $instance = null;
 
 	public function __construct()
 	{
-		// Create connection
-		$this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-		// Check connection
-		if ($this->conn->connect_error) {
-		    die("Connection failed: " . $this->conn->connect_error);
-		}
+		
 	}
 
 	public function getConnection(){
-		return $this->conn;
+		return new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 	}
+
+	public static function getInstance()
+    {
+        if (!isset(static::$instance)) {
+            static::$instance = new static;
+        }
+        return static::$instance;
+    }
 }

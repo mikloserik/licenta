@@ -105,9 +105,6 @@ function registerUser() {
 }
 
 function logOut() {
-	//document.cookie = "user=guest";
-	
-
 	var xhttp; 
   
   	xhttp = new XMLHttpRequest();

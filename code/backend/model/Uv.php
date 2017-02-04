@@ -24,7 +24,7 @@ class UvCollection
 	{
 		$uvCollection = array();
 
-		$c = new Connection();
+		$c = Connection::getInstance();
 		$conn = $c->getConnection();
 		
 		$sql = "SELECT uv.id, uv.value as uvv, uv.latitude, uv.longitude FROM uv;";

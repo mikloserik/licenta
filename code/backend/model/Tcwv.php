@@ -24,7 +24,7 @@ class TcwvCollection
 	{
 		$tcwvCollection = array();
 
-		$c = new Connection();
+		$c = Connection::getInstance();
 		$conn = $c->getConnection();
 		
 		$sql = "SELECT tcwv.id, tcwv.value as tcwvv, tcwv.latitude, tcwv.longitude FROM tcwv;";

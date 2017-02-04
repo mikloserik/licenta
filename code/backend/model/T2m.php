@@ -24,7 +24,7 @@ class T2mCollection
 	{
 		$t2mCollection = array();
 
-		$c = new Connection();
+		$c = Connection::getInstance();
 		$conn = $c->getConnection();
 		
 		$sql = "SELECT t2m.id, t2m.value as t2mv, t2m.latitude, t2m.longitude FROM t2m;";
